@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.nihao</groupId>
+  <artifactId>manager-sit</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <modules>
+    <module>manager-pojo</module>
+    <module>manager-mapper</module>
+    <module>manager-web</module>
+    <module>manager-serve</module>
+
+  </modules>
+
+  <name>Maven</name>
+  <!--  对依赖包的版本做管理 在配置文件中时间共用性更好 依赖是指自己不能实现或者引用别人的-->
+  <properties> <!--单独写版本，利于修改-->
+    <!--JUnit是一个Java语言的单元测试框架-->
+    <junit.version>4.12</junit.version>
+    <!--框架 release稳定版 RC2需修改版-->
+    <spring.version>4.1.3.RELEASE</spring.version>
+    <!--持久层管理-->
+    <mybatis.version>3.2.8</mybatis.version>
+    <!--spring整合mybatis-->
+    <mybatis.spring.version>1.2.2</mybatis.spring.version>
+    <!--数据库驱动-->
+    <mysql.version>5.1.32</mysql.version>
+    <!--alibaba 数据库连接-->
+    <druid.version>1.0.9</druid.version>
+    <jstl.version>1.2</jstl.version>
+    <!--处理请求-->
+    <servlet.version>2.5</servlet.version>
+
+    <jsp.version>2.0</jsp.version>
+    <tomcat.version>2.2</tomcat.version>
+  </properties>
+  <dependencyManagement><!--父工程知识做依赖管理不需要依赖注入-->
+    <dependencies>
+      <!--测试-->
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-test</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <!--mybatis-->
+      <dependency>
+        <groupId>org.mybatis</groupId>
+        <artifactId>mybatis</artifactId>
+        <version>${mybatis.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.mybatis</groupId>
+        <artifactId>mybatis-spring</artifactId>
+        <version>${mybatis.spring.version}</version>
+      </dependency>
+      <!--mysql-->
+      <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>${mysql.version}</version>
+      </dependency>
+      <!--druid 数据库连接 连接池-->
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>druid</artifactId>
+        <version>${druid.version}</version>
+      </dependency>
+      <!--spring-->
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-beans</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-jdbc</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-webmvc</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-aspects</artifactId>
+        <version>${spring.version}</version>
+      </dependency>
+      <!--jsp 标准标签库-->
+      <dependency>
+        <groupId>jstl</groupId>
+        <artifactId>jstl</artifactId>
+        <version>${jstl.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>servlet-api</artifactId>
+        <version>${servlet.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>jsp-api</artifactId>
+        <version>${jsp.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  <build>
+    <!--把每个项目的映射配置文件打包放到项目中
+    故需要配置资源拷贝插件 -->
+    <resources>
+      <resource><!--去哪里找资源文件-->
+        <directory>/src/main/java</directory>
+        <includes>
+          <include>**/*.xml</include>
+        </includes>
+      </resource>
+      <resource><!--去哪里找资源文件-->
+        <directory>/src/main/resource</directory>
+        <includes>
+          <include>**/*.xml</include>
+          <include>**/*.properties</include>
+        </includes>
+      </resource>
+    </resources>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.tomcat.maven</groupId>
+          <artifactId>tomcat7-maven-plugin</artifactId>
+          <version>${tomcat.version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>

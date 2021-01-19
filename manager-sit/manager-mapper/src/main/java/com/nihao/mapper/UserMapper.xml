@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nihao.mapper.UserMapper">
+<!--1、分开写-->
+    <!-- 数据表列字段与pojo类属性映射关系 type:指定将查询的结果封装到哪个类pojo对象中 id:指定一个唯一表示resultMap的值 -->
+<!--    <resultMap type="com.tsvv.pojo.Emply" id="emplyRM">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="tele" property="tele"/>
+        <result column="addr" property="addr"/>
+        <result column="birthday" property="birthday"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>-->
+    <!-- 1.查询所有员工信息 id值为对应接口中方法的名字 resultMap:指定为resultMap标签的id值 -->
+    <!--
+    <select id="findAll" resultMap="emplyRM">
+        select * from tb_emply
+    </select>-->
+<!--2、直接写-->
+    <insert id="insertUser" parameterType="com.nihao.pojo.Users">
+        insert into users(username,userage) values(#{username},#{userage})
+    </insert>
+    <select id="selectUserAll" resultType="com.nihao.pojo.Users">
+        select * from users
+    </select>
+</mapper>
